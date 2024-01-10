@@ -12,12 +12,12 @@
 <body>
   <div class="wrapper">
     <h2>Registration</h2>
-    <form method="POST" action="../Controller/registerController.php">
-      <div class="input-box">
-        <input type="text" name="nom" placeholder="Entrer votre nom" required>
-      </div>
+    <form method="POST" action="http://localhost/youwikis/views/login.php">
       <div class="input-box">
         <input type="text" name="prenom" placeholder="Entrer votre prenom" required>
+      </div>
+      <div class="input-box">
+        <input type="text" name="nom" placeholder="Entrer votre nom" required>
       </div>
       <div class="input-box">
         <input type="text" name="email" placeholder="Entrer votre email" required>

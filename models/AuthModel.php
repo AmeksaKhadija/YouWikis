@@ -1,5 +1,5 @@
 <?php
-class UserModel
+class AuthModel
 {
   public $conn;
   public $email;
@@ -91,12 +91,8 @@ public function loginUser($password)
           }else if($user['isAdmin']=='0'){
             header('Location: ../views/classes.php');
             exit();
-
-          }else{
-            header('Location: ../views/index.php');
-            exit();
           }
-           
+          
         } else {
             echo 'Invalid password';
         }
@@ -106,81 +102,6 @@ public function loginUser($password)
 
     $req->close();
 }
-
-
-// public function getAllUsers(){
-//   $users=array();
-//   $req="SELECT * from utilisateur where role_name!='admin'";
-//   $query=$this->conn->query($req);
-//   while($array=$query->fetch_assoc()) {
-//       $users[]=$array;
-// }
-// return $users;
-
-// }
-
-// public function updateUser($userId)
-// {
-//     if (empty($userId)) {
-//         die("User ID is required for update.");
-//     }
-
-//     $update_user_query = "UPDATE users 
-//                           SET lastname=?, firstname=?, email=?, phone=?, CIN=?, birthdate=?, role_name=? 
-//                           WHERE id_user=?";
-
-//     $stmt = $this->conn->prepare($update_user_query);
-
-//     if (!$stmt) {
-//         die("Preparation failed: " . $this->conn->error);
-//     }
-
-//     $stmt->bind_param(
-//         "sssssssi",
-//         $this->lastname,
-//         $this->firstname,
-//         $this->email,
-//         $this->phone,
-//         $this->CIN,
-//         $this->birthdate,
-//         $this->role_name,
-//         $userId
-//     );
-
-//     if (!$stmt->execute()) {
-//         die("Execute failed: " . $stmt->error);
-//     }
-
-//     $stmt->close();
-// }
-
-
-// public function getUserById($idModifier)
-// {
-//     $req = "SELECT * FROM users WHERE id_user = ?";
-//     $stmt = $this->conn->prepare($req);
-//     $stmt->bind_param("i", $idModifier);
-//     $stmt->execute();
-//     $result = $stmt->get_result();
-
-//     if ($result->num_rows > 0) {
-//         $userDetail = $result->fetch_assoc();
-
-//         $this->setFirstname($userDetail['firstname']);
-//         $this->setLastname($userDetail['lastname']);
-//         $this->setEmail($userDetail['email']);
-//         $this->setPhone($userDetail['phone']);
-//         $this->setCIN($userDetail['CIN']);
-//         $this->getRoleName($userDetail['role_name']);
-//         $this->setBirthdate($userDetail['birthdate']);
-
-//         return $userDetail;
-//     }
-
-//     return null;
-// }
-
-
 
 }
  ?>

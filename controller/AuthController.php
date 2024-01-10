@@ -1,12 +1,12 @@
 <?php
 include('../database/Database.php');
-include('../models/UserModel.php');
+include('../models/AuthModel.php');
 
 $conn = new Database('localhost', 'root', '', 'youwikis');
 
 $AuthController = new AuthController($conn);
-$loginController->login();
-$registerController->register();
+$AuthController->register();
+$AuthController->login();
 
 class AuthController
 {
@@ -23,9 +23,9 @@ class AuthController
             $password = isset($_POST['password']) ? $_POST['password'] : '';
             $email = isset($_POST['email']) ? trim($_POST['email']) : '';
 
-            $userModel = new UserModel($this->conn);
-            $userModel->setEmail($email);
-            $userModel->loginUser($password);
+            $AuthModel = new AuthModel($this->conn);
+            $AuthModel->setEmail($email);
+            $AuthModel->loginUser($password);
         } 
     }
     public function register()
@@ -36,16 +36,14 @@ class AuthController
             $email = isset($_POST['email']) ? $_POST['email'] : '';
             $password = isset($_POST['password']) ? $_POST['password'] : '';
 
-            $userModel = new UserModel($this->conn);
-            $userModel->setprenom($prenom);
-            $userModel->setnom($nom);
-            $userModel->setEmail($email);
-            $userModel->setPassword($password);
-            $userModel->insertUser();
-            header('Location: ../view/login.php');
-                // header!!!!!
+            $AuthModel = new AuthModel($this->conn);
+            $AuthModel->setprenom($prenom);
+            $AuthModel->setnom($nom);
+            $AuthModel->setEmail($email);
+            $AuthModel->setPassword($password);
+            $AuthModel->insertUser();
             }
-        }
+    }
 
 }
 ?>
