@@ -1,8 +1,12 @@
-
 <?php 
-require_once ('../Controller/categorieController.php');
-$categoriecontroller = new categorieController();
-$categories = $categorieController->getAllCategories();
+require_once ('../Controller/AdminController.php');
+
+$result = [];
+
+if (isset($_GET['id_tag'])) {
+    $id = $_GET['id_tag'];
+    $result = $tagController->getTagById($id);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,63 +102,23 @@ $categories = $categorieController->getAllCategories();
             </ul>
         </aside>
         <div class="container">
-            <div class="content">
-            <button class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter Catégorie</button>
-                <table class="agent table align-middle bg-white">
-                    <thead class="bg-light">
-                        <tr>
-                            <th class="col-8">Categorie Name</th>
-                            <th class="col-4">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                        if(!empty($categories)){
-                        foreach ($categories as $categorie) {
-                        ?>
-                        <tr class="freelancer">
-                            <td>
-                          <?php echo $categorie['nom'];?>
-                            </td>
-                            <td>
-                                <a href="../../youwikis/views/modifierCategorie.php?idcategorie=<?php echo $categorie['id_categorie']; ?>"><button class="btn btn-secondary">Modifier</button></a>
-                                <a href="../../youwikis/Helprs/categorieHelprs.php?id=<?php echo $categorie['id_categorie']; ?>"><button class="btn btn-secondary" name="id_categorie" >Supprimer</button>
-                            </td>
-                        </tr>
-
-                        <?php
-                        }
-                            
-                    }else {
-                        echo "Vide";
-                    }
-                        ?>
-                    </tbody>
-                </table>
+        <form action="" method="post">
+            <h1>Modifier Tag</h1>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <input type="hidden" name="idtag" value="<?php echo $result['id_tag']; ?>">
+                    <label for="nomTag" class="form-label">Nom du tag :</label>
+                    <input type="text" class="form-control" id="nomTag" name="nomTage"  value="<?php  echo $result['nom']; ?>" required>
+                </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-secondary">Save changes</button>
+            </div>
+        </form>
+
         </div>    
     </div>
-
-       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <form action="" method="post">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter Catégorie</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <div class="mb-3">
-        <label for="nomCategorie" class="form-label">Nom de la catégorie :</label>
-        <input type="text" class="form-control" id="nomCategorie" name="nomCategorie" required>
-    </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-secondary" >Save changes</button>
-      </div>
-    </div>
-  </div>
   </form>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

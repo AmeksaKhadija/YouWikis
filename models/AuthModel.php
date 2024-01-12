@@ -85,11 +85,11 @@ public function loginUser($password)
 
         if (password_verify($password, $hashedPassword)) {
           if($user['isAdmin']=='1'){
-            header('Location: ../views/admin/dashboard/users.php');
+            header('Location:http://localhost/youwikis/views/Categorie.php');
             exit();
 
           }else if($user['isAdmin']=='0'){
-            header('Location: ../views/classes.php');
+            header('Location: ../views/index.php'); 
             exit();
           }
           

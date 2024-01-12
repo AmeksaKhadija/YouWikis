@@ -26,7 +26,7 @@ class AuthController
             $AuthModel = new AuthModel($this->conn);
             $AuthModel->setEmail($email);
             $AuthModel->loginUser($password);
-        } 
+        }
     }
     public function register()
     {

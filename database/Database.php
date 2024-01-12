@@ -1,6 +1,6 @@
 <?php
 class Database {
-    public $conn;
+    private $conn;
     private $servername;
     private $username;
     private $password;
@@ -12,10 +12,11 @@ class Database {
         $this->password = $password;
         $this->dbname = $dbname;
 
-        $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
-
-        if ($this->conn->connect_error) {
-            die("Connection failed: " . $this->conn->connect_error);
+        try {
+            $this->conn = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            die("Connection failed: " . $e->getMessage());
         }
     }
 
@@ -31,5 +32,3 @@ class Database {
         return $this->conn->query($sql);
     }
 }
-
-?>

@@ -4,6 +4,7 @@ require_once "../controller/AuthController.php";
 
 $usercontroller = new AuthController();
 
+
 if(isset($_GET['action'])){
     $route = $_GET['action'];
 
