@@ -3,7 +3,6 @@
 include('../database/Database.php');
 include('../models/AuthModel.php');
 include('../models/CategorieModel.php');
-include('../models/TagModel.php');
 
 class categorieController
 {
@@ -22,22 +21,10 @@ class categorieController
         exit();
     }
 
-    public function addEditCategory($nom, $id = null)
+    public function addCategory()
     {
-        if ($id){
-            $existingCategory = $this->categorieModel->getCategoryById($id);
-
-            if ($existingCategory) {
-                echo "Category exists. Editing...";
-                $this->categorieModel->editCategorie($nom, $id);
-            }
-        } else {
-            echo "Category doesn't exist. Adding...";
-            $this->categorieModel->addCategorie($nom);
-        }
-
-        header("Location:../views/categorie.php");
-        exit();
+        $nom = $_POST['nomCategorie'];
+        $this->categorieModel->addCategory($nom);
     }
 
     public function getCategoryById($id)

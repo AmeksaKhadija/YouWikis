@@ -136,7 +136,7 @@ $tags = $tagController->getAllTags();
     </div>
 
        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <form action="" method="post">
+        <form action="../Helprs/tagHelprs.php" method="post">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

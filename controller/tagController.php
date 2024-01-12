@@ -2,7 +2,6 @@
 
 include('../database/Database.php');
 include('../models/AuthModel.php');
-include('../models/CategorieModel.php');
 include('../models/TagModel.php');
 
 class tagController
@@ -22,22 +21,10 @@ class tagController
         exit();
     }
 
-    public function addEditTag($nom, $id = null)
+    public function addTag()
     {
-        if ($id) {
-            $existingTag = $this->tagModel->getTagById($id);
-
-            if ($existingTag) {
-                echo "Tag exists. Editing...";
-                $this->tagModel->editTag($nom, $id);
-            }
-        } else {
-            echo "Tag doesn't exist. Adding...";
-            $this->tagModel->addTag($nom);
-        }
-
-        header("Location:../views/tag.php");
-        exit();
+        $nom = $_POST['nomTag'];
+        $this->tagModel->addTag($nom);
     }
 
     public function getAllTags()

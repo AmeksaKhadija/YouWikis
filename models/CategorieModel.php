@@ -40,7 +40,7 @@ class CategorieModel
         }
     }
 
-    public function addCategorie($nom)
+    public function addCategory($nom)
     {
         $insert_user_query = "INSERT INTO categorie (nom) VALUES (:nom)";
         $stmt = $this->conn->prepare($insert_user_query);
