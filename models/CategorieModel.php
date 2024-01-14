@@ -95,9 +95,17 @@ class CategorieModel
             return null;
         }
     }
-    
 
-    // ... Autres méthodes ...
+
+    public function getTotalCategories()
+    {
+        $query = "SELECT COUNT(*) as total_categories FROM categorie";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $res["total_categories"];
+    }
+    
 }
 
 

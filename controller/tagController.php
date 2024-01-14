@@ -27,9 +27,23 @@ class tagController
         $this->tagModel->addTag($nom);
     }
 
+    public function editTag()
+    {
+        
+        $id = $_POST['idtag'];
+        $nom =$_POST['nom_Tag'];
+        $this->tagModel->editTag($nom, $id);
+    }
+
     public function getAllTags()
     {
        $tags = $this->tagModel->getAllTags();
        return $tags;
+    }
+
+    public function getTagById($id)
+    {
+        return $this->tagModel->getTagById($id);
+
     }
 }

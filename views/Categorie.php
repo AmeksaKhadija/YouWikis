@@ -92,9 +92,9 @@ $categories = $categorieController->getAllCategories();
                 <li><h5>dashboard</h5></li>
                 <li><a href="http://localhost/youwikis/views/Categorie.php">CATEGORIES</a></li>
                 <li><a href="http://localhost/youwikis/views/Tag.php">TAGS</a></li>
-                <li><a href="#">WIKIS</a></li>
-                <li><a href="#">ARCHIVER</a></li>
-                <li><a href="#">STATISTIQUES</a></li>
+                
+                <li><a href="http://localhost/youwikis/views/archive.php">ARCHIVER</a></li>
+                <li><a href="http://localhost/youwikis/views/statistique.php">STATISTIQUES</a></li>
             </ul>
         </aside>
         <div class="container">

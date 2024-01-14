@@ -12,7 +12,7 @@
     <div class="wrapper">
       <div class="title"><span>Bienvenu autre fois</span></div>
       <h1></h1>
-      <form action="../Controller/loginController.php" method="POST"> 
+      <form action="../Controller/LoginController.php" method="POST"> 
         <div class="row">
           <i class="fas fa-user"></i>
           <input type="text" name="email" placeholder="email" required>

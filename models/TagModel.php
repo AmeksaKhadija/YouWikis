@@ -87,4 +87,13 @@ public function getTagById($tagId)
         }
     }
 
+    public function getTotalTag()
+    {
+        $query = "SELECT COUNT(*) as total_tags FROM tag ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $res["total_tags"];
+    }
+
 }

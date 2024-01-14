@@ -27,6 +27,13 @@ class categorieController
         $this->categorieModel->addCategory($nom);
     }
 
+    public function editCategorie()
+    {
+        $id = $_POST['idcategorie'];
+        $nom =$_POST['nom_categorie'];
+        $this->categorieModel->editCategorie($nom, $id);
+    }
+
     public function getCategoryById($id)
     {
         return $this->categorieModel->getCategoryById($id);

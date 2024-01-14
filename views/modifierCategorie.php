@@ -1,5 +1,5 @@
 <?php 
-require_once ('../Controller/AdminController.php');
+require_once ('../controller/categorieController.php');
 
 $result = [];
 
@@ -96,19 +96,19 @@ if (isset($_GET['idcategorie'])) {
                 <li><h5>dashboard</h5></li>
                 <li><a href="http://localhost/youwikis/views/Categorie.php">CATEGORIES</a></li>
                 <li><a href="http://localhost/youwikis/views/Tag.php">TAGS</a></li>
-                <li><a href="#">WIKIS</a></li>
-                <li><a href="#">ARCHIVER</a></li>
+                <li><a href="http://localhost/youwikis/views/archive.php">WIKIS</a></li>
+                <li><a href="http://localhost/youwikis/views/archive.php">ARCHIVER</a></li>
                 <li><a href="#">STATISTIQUES</a></li>
             </ul>
         </aside>
         <div class="container">
-        <form action="" method="post">
+        <form action="../Helprs/categorieHelprs.php" method="post">
             <h1>Modifier Catégorie</h1>
             <div class="modal-body">
                 <div class="mb-3">
                     <input type="hidden" name="idcategorie" value="<?php  echo $result['id_categorie']; ?>">
                     <label for="nomCategorie" class="form-label">Nom de la catégorie :</label>
-                    <input type="text" class="form-control" id="nomCategorie" name="nomCategorie"  value="<?php  echo $result['nom']; ?>" required>
+                    <input type="text" class="form-control" id="nomCategorie" name="nom_categorie"  value="<?php  echo $result['nom']; ?>" required>
                 </div>
             </div>
             <div class="modal-footer">

@@ -1,7 +1,12 @@
+
 <?php 
-require_once ('../Controller/tagController.php');
-$tagController = new tagController();
-$tags = $tagController->getAllTags();
+require_once ('../Controller/WikiController.php');
+$wikicontroller = new WikiController();
+$wikis = $wikicontroller->getAllwikis();
+$categories = $wikicontroller->getAllCategories();
+$tags = $wikicontroller->getAlltags();
+// print_r($tags);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,9 +15,14 @@ $tags = $tagController->getAllTags();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" rel="stylesheet" /> 
+
+  
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <style>
         body {
             background-color: #f8f9fa;
@@ -61,6 +71,7 @@ $tags = $tagController->getAllTags();
         aside li:hover a {
             color: black;
         }
+       
     </style>
 </head>
 
@@ -98,27 +109,53 @@ $tags = $tagController->getAllTags();
         </aside>
         <div class="container">
             <div class="content">
-            <button class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter Tag</button>
                 <table class="agent table align-middle bg-white">
                     <thead class="bg-light">
                         <tr>
-                            <th class="col-8">Tag Name</th>
+                            <th class="col-8">Title</th>
+                            <th class="col-8">Contenu</th>
+                            <th class="col-8">Category</th>
+                            <th class="col-8">Tags</th>
                             <th class="col-4">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
+
+                        <?php
+                  $uniqueArticles = array();
+                  foreach ($wikis as $article) :
+                    $articleId = $article['id_wiki'];
+                    if (!isset($uniqueArticles[$articleId])) {
+                      $uniqueArticles[$articleId] = $article;
+                      $uniqueArticles[$articleId]['tags'] = array();
+                    }
+                    $uniqueArticles[$articleId]['tags'][] = $article['nom'];
+                  endforeach;
+                  ?>
                         <?php 
-                        if(!empty($tags)){
-                        foreach ($tags as $Tag) {
-                           
+                        if(!empty($wikis)){
+                            foreach ($uniqueArticles as $article) {
                         ?>
-                        <tr class="freelancer">
-                            <td>
-                          <?php echo $Tag['nom'];?>
+                        <tr>
+                            <td >
+                          <?php echo $article['titre'];?>
                             </td>
                             <td>
-                                <a href="../../youwikis/views/modifierTag.php?id_tag=<?php echo $Tag['id_tag']; ?>"><button class="btn btn-secondary">Modifier</button></a>
-                                <a href="../../youwikis/Helprs/tagHelprs.php?tag_id=<?php echo $Tag['id_tag']; ?>"><button class="btn btn-secondary" name="id_tag" >Supprimer</button>
+                          <?php echo $article['contenu'];?>
+                            </td>
+                            <td>
+                          <?php echo $article['category_name'];?>
+                            </td>
+                            <td>
+                            <?php foreach ($article['tags'] as $tag) : ?>
+                          
+                          <?php echo $tag; ?>
+                        
+                      <?php endforeach; ?>
+                            </td>
+                            <td>
+                                <a href="../../youwikis/Helprs/archiveHelprs.php?idwiki=<?php echo $article['id_wiki']; ?>"><button class="btn btn-secondary">Archiver</button></a>
+                             
                             </td>
                         </tr>
 
@@ -135,28 +172,8 @@ $tags = $tagController->getAllTags();
         </div>    
     </div>
 
-       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <form action="../Helprs/tagHelprs.php" method="post">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter Tag</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <div class="mb-3">
-        <label for="nomTag" class="form-label">Nom du Tag :</label>
-        <input type="text" class="form-control" id="nomTag" name="nomTag" required>
-    </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-secondary" >Save changes</button>
-      </div>
-    </div>
-  </div>
-  </form>
-</div>
+      
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -12,7 +12,7 @@
 <body>
   <div class="wrapper">
     <h2>Registration</h2>
-    <form method="POST" action="http://localhost/youwikis/views/login.php">
+    <form method="POST" action="http://localhost/youwikis/controller/AuthController.php">
       <div class="input-box">
         <input type="text" name="prenom" placeholder="Entrer votre prenom" required>
       </div>

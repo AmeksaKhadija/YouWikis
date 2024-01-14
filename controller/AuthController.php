@@ -6,7 +6,7 @@ $conn = new Database('localhost', 'root', '', 'youwikis');
 
 $AuthController = new AuthController($conn);
 $AuthController->register();
-$AuthController->login();
+
 
 class AuthController
 {
@@ -17,17 +17,7 @@ class AuthController
         $this->conn = $conn;
     }
 
-    public function login()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $password = isset($_POST['password']) ? $_POST['password'] : '';
-            $email = isset($_POST['email']) ? trim($_POST['email']) : '';
 
-            $AuthModel = new AuthModel($this->conn);
-            $AuthModel->setEmail($email);
-            $AuthModel->loginUser($password);
-        }
-    }
     public function register()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -42,6 +32,7 @@ class AuthController
             $AuthModel->setEmail($email);
             $AuthModel->setPassword($password);
             $AuthModel->insertUser();
+            header('Location: ../views/login.php');
             }
     }
 

@@ -16,3 +16,9 @@ if(isset($_POST['nomCategorie'])){
     header("Location: {$_SERVER['HTTP_REFERER']}");
 
 }
+
+if(isset($_POST['nom_categorie'])){
+    $categorie->editCategorie();
+    header("Location: http://localhost/youwikis/views/Categorie.php");
+
+}

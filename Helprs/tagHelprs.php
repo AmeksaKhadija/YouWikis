@@ -12,5 +12,11 @@ if(isset($_GET['tag_id'])){
 if(isset($_POST['nomTag'])){
     $tag->addTag();
     header("Location: {$_SERVER['HTTP_REFERER']}");
+}
+
+if(isset($_POST['nom_Tag'])){
+    
+    $tag->editTag();
+    header("Location: http://localhost/youwikis/views/Tag.php");
 
 }

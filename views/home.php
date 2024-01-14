@@ -94,7 +94,7 @@
                 <input type="text" id="company" placeholder="Company">
             </div>
             <a href="?route=search">
-                <button type="submit" class="btn btn-primary mb-2">
+                <button type="submit" class="btn btn-primary mb-2">Search
                 </button>
             </a>
         </form>
@@ -144,7 +144,7 @@
 
 
     <footer>
-        <p>© 2023 JobEase </p>
+        <p>© 2023 Wiki™ </p>
     </footer>
 </body>
 
