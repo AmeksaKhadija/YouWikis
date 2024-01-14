@@ -154,9 +154,19 @@ $tags = $wikicontroller->getAlltags();
                       <?php endforeach; ?>
                             </td>
                             <td>
-                                <a href="../../youwikis/Helprs/archiveHelprs.php?idwiki=<?php echo $article['id_wiki']; ?>"><button class="btn btn-secondary">Archiver</button></a>
-                             
-                            </td>
+                            <?php
+                            $buttonClass = ($article['isAccepted'] == 1) ? 'btn-secondary' : 'btn-danger';
+                            $buttonText = ($article['isAccepted'] == 1) ? 'Archiver' : 'Désarchiver';
+                            $actionLink = ($article['isAccepted'] == 1)
+                                ? '../../youwikis/Helprs/archiveHelprs.php?idwiki=' . $article['id_wiki']
+                                : '../../youwikis/Helprs/unarchiveHelprs.php?idwiki=' . $article['id_wiki'];
+                            ?>
+
+                            <a href="<?php echo $actionLink; ?>">
+                                <button class="btn <?php echo $buttonClass; ?>"><?php echo $buttonText; ?></button>
+                            </a>
+                        </td>
+
                         </tr>
 
                         <?php

@@ -70,6 +70,13 @@ class WikiController
         header("Location: ../views/archive.php");
         exit();
     }
+
+    public function desarchiveWiki($wikiId){
+        $wiki = $this->wikiModel;
+        $wiki->desarchiveWiki($wikiId);
+        header("Location: ../views/archive.php");
+        exit();
+    }
     public function getTotalCategories()
     {
         $totalcategories = $this->categorieModel->getTotalCategories();
