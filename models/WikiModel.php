@@ -28,6 +28,19 @@ class WikiModel
             return $wikis;
         }
     }
+    
+    public function getAllwikisNonarchives()
+    {
+        $req = "SELECT *, categorie.nom as category_name FROM wikitag JOIN wiki ON wikitag.id_wiki=wiki.id_wiki 
+        JOIN categorie ON wiki.id_categorie=categorie.id_categorie
+        JOIN tag ON tag.id_tag=wikitag.id_tag where isAccepted=1";
+        $stmt = $this->conn->query($req);
+        $wikis = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if (!empty($wikis)) {
+            return $wikis;
+        }
+    }
 
     public function deleteCategory($categoryId)
     {

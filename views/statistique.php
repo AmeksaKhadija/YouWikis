@@ -133,7 +133,7 @@ $tags = $wikicontroller->getTotalTag();
                                 <?php echo $wikis; ?>
                             </h3>
 
-                            <p>Wikis</p>
+                            <p>Wikis Archiver</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>

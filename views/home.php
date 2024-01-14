@@ -1,4 +1,13 @@
 
+<?php 
+require_once ('../Controller/WikiController.php');
+$wikicontroller = new WikiController();
+$wikis = $wikicontroller->getAllwikisNonarchives();
+$categories = $wikicontroller->getAllCategories();
+$tags = $wikicontroller->getAlltags();
+// print_r($tags);
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -99,49 +108,65 @@
             </a>
         </form>
     </section>
+  
     <div id="results">
-
-        <!--------------------------  card  --------------------->
         <section class="light">
-            <h2 class="text-center py-3"></h2>
-            <div class="container py-2">
+            <?php
+            $uniqueArticles = array();
+            foreach ($wikis as $article) :
+                $articleId = $article['id_wiki'];
+                if (!isset($uniqueArticles[$articleId])) {
+                    $uniqueArticles[$articleId] = $article;
+                    $uniqueArticles[$articleId]['tags'] = array();
+                }
+                $uniqueArticles[$articleId]['tags'][] = $article['nom'];
 
-                <article class="postcard light green">
-                    <a class="postcard__img_link" href="#">
-                        
-                        <img class="postcard__img" src="" alt="Image Title" />
-                    </a>
-                    <div class="postcard__text t-dark">
-                        <h3 class="postcard__title green"><a href="#">
-                                voila le titre
-                            </a></h3>
-                        <div class="postcard__subtitle small">
-                            <time datetime="2020-05-25 12:00:00">
-                                <i class="fas fa-calendar-alt mr-2"></i>
-                                voila la company
-                            </time>
+            endforeach;
+            ?>
+            <?php if (!empty($wikis)) : ?>
+             <?php foreach ($uniqueArticles as $article) : ?>
+                <div class="container py-2">
+                    <article class="postcard light green">
+                        <a class="postcard__img_link" href="#">
+                            <img class="postcard__img" src="../Assets/images/wiki.png" alt="Image Title" />
+                        </a>
+                        <div class="postcard__text t-dark">
+                            <h3 class="postcard__title green">
+                                <a href="#">
+                                    <?php echo $article['titre']; ?>
+                                </a>
+                            </h3>
+                            <div class="postcard__subtitle small">
+                                <time datetime="2020-05-25 12:00:00">
+                                    <i class="fas fa-calendar-alt mr-2"></i>
+                                    <?php echo $article['category_name']; ?>
+                                </time>
+                            </div>
+                            <div class="postcard__bar"></div>
+                            <div class="postcard__preview-txt">
+                                <?php echo $article['contenu']; ?>
+                            </div>
+                            <ul class="postcard__tagbox">
+                                <p>Tags :</p> 
+                                <li class="tag__item">
+                                    <i class="fas fa-tag"></i>
+                                    <?php foreach ($article['tags'] as $tag) : ?>
+                                        <?php echo $tag; ?>
+                                    <?php endforeach; ?>
+                                    
+                                </li>
+                               
+                            </ul>
                         </div>
-                        <div class="postcard__bar"></div>
-                        <div class="postcard__preview-txt">
-                        voila la description
-                        </div>
-                        <ul class="postcard__tagbox">
-                            <li class="tag__item"><i class="fas fa-tag mr-2"></i>
-                                voila location
-                            </li>
-                            <li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
-                            <li class="tag__item play green">
-                                <a>button</a>
-                            </li>
-                        </ul>
-                    </div>
-                </article>
-            </div>
+                    </article>
+                </div>
+            <?php endforeach; ?>
+            
+            <?php else : ?>
+             <p>Aucun wiki disponible.</p>
+            <?php endif; ?>
         </section>
     </div>
-
-
-
 
     <footer>
         <p>© 2023 Wiki™ </p>

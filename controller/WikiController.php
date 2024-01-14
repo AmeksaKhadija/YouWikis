@@ -28,6 +28,12 @@ class WikiController
          return $wikis;
     }
 
+    public function getAllwikisNonarchives()
+    {
+         $wikis = $this->wikiModel->getAllwikisNonarchives();
+         return $wikis;
+    }
+
     public function getAllCategories()
     {
          $categories=$this->categorieModel->getAllCategories();

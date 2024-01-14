@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -12,21 +11,21 @@
 <body>
   <div class="wrapper">
     <h2>Registration</h2>
-    <form method="POST" action="http://localhost/youwikis/controller/AuthController.php">
+    <form onsubmit="return validateFormWithRegex()" method="POST" action="http://localhost/youwikis/controller/AuthController.php">
       <div class="input-box">
-        <input type="text" name="prenom" placeholder="Entrer votre prenom" required>
+        <input type="text" name="prenom" placeholder="Entrer votre prenom">
       </div>
       <div class="input-box">
-        <input type="text" name="nom" placeholder="Entrer votre nom" required>
+        <input type="text" name="nom" placeholder="Entrer votre nom">
       </div>
       <div class="input-box">
-        <input type="text" name="email" placeholder="Entrer votre email" required>
+        <input type="text" name="email" placeholder="Entrer votre email">
       </div>
       <div class="input-box">
-        <input type="password" name="password" placeholder="Entrer votre password" required>
+        <input type="password" name="password" placeholder="Entrer votre password">
       </div>
       <div class="policy">
-        <input type="checkbox" required>
+        <input type="checkbox" name="terms" required>
         <h3>I accept all terms & condition</h3>
       </div>
       <div class="input-box button">
@@ -37,6 +36,8 @@
       </div>
     </form>
   </div>
+
+  <script src="../Assets/js/scrpt.js"></script>
 </body>
 
 </html>
