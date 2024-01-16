@@ -187,6 +187,22 @@ public function getTotalArticleArchive()
         return $res["total_wikis_archives"];
     }
 
+    public function search($searchTerm)
+    {
+        $stmt = "SELECT *, categorie.nom as category_name FROM wikitag JOIN wiki ON wikitag.id_wiki=wiki.id_wiki 
+        JOIN categorie ON wiki.id_categorie=categorie.id_categorie
+        JOIN tag ON tag.id_tag=wikitag.id_tag WHERE titre LIKE  '%$searchTerm%' ";
+        $result =  $this->conn->query($stmt);
+
+        $searchResults = [];
+        
+        while ($row = $result->fetchAll(PDO::FETCH_ASSOC)) {
+            $searchResults[] = $row;
+        }
+
+        return $searchResults;
+    }
+
     
 }
 

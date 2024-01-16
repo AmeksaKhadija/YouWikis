@@ -46,6 +46,15 @@ class WikiController
        return $tags;
     }
 
+    public function search($searchTerm){
+       
+        if ($searchTerm !== null) {
+            $wikis =$this->wikiModel->search($searchTerm);
+        }
+        
+        require('../views/search.php');
+    }
+
 
 
 

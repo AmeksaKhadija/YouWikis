@@ -92,20 +92,23 @@ $tags = $wikicontroller->getAlltags();
     </header>
 
     <section class="search">
-        <form class="form-inline" method="post" onsubmit="event.preventDefault(); filterjob();">
+    <form class="form-inline" method="post" onsubmit="event.preventDefault(); filterwiki();">
             <div class="form-group mb-2">
-                <input type="text" id="title" placeholder="Keywords">
+                <input type="text" id="title" placeholder="title">
             </div>
             <div class="form-group mx-sm-3 mb-2">
-                <input type="text" id="location" placeholder="Location">
+                <input type="text" id="categorie" placeholder="categorie">
             </div>
             <div class="form-group mx-sm-3 mb-2">
-                <input type="text" id="company" placeholder="Company">
+                <input type="text" id="tag" placeholder="tag">
             </div>
             <a href="?route=search">
-                <button type="submit" class="btn btn-primary mb-2">Search
+                <button type="submit" class="btn btn-primary mb-2">
+                   chercher
                 </button>
             </a>
+
+
         </form>
     </section>
   
@@ -171,6 +174,68 @@ $tags = $wikicontroller->getAlltags();
     <footer>
         <p>© 2023 Wiki™ </p>
     </footer>
+
+    <script>
+        	
+		function filterwiki() {
+    let title = document.getElementById('title').value;
+    let categorie = document.getElementById('categorie').value;
+    let tag = document.getElementById('tag').value;
+    let results = document.getElementById("results");
+
+    let data = {};
+
+    if (title.trim() !== '') {
+        data.title = title;
+    }
+
+    if (categorie.trim() !== '') {
+        data.categorie = categorie;
+    }
+
+    if (tag.trim() !== '') {
+        data.tag = tag;
+    }
+
+    if (Object.keys(data).length === 0) {
+        window.location.href = "../views/home.php";
+        return;
+    }
+
+    $.ajax({
+        method: "POST",
+        url: "../Helprs/searchHelprs.php",
+        data: data,
+        success: function (response) {
+            results.innerHTML = response;
+        },
+        error: function (error) {
+            alert("La recherche n'a pas fonctionné.");
+        },
+    });
+
+    return false;
+}
+
+
+
+
+
+(function () {
+    $.ajax({
+        method: "GET",
+        url: "../Helprs/searchHelprs.php",
+        data: {},
+        success: function (response) {
+            console.log("the response is :", response);
+
+        },
+        error: function () {
+            alert("it doesn't work");
+        },
+    });
+})();
+    </script>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
