@@ -99,7 +99,7 @@ $tags = $wikicontroller->getAlltags();
     <div class="container-fluid">
         <aside class="col-md-2 bg-dark text-light p-4 aside">
             <ul class="list-unstyled">
-                <li><h5>dashboard</h5></li>
+                <li><a href="../views/home.php"><h5>dashboard</h5></a></li>
                 <li><a href="http://localhost/youwikis/views/dashboard.php">WIKIS</a></li>
             </ul>
         </aside>

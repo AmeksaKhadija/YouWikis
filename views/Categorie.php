@@ -89,10 +89,9 @@ $categories = $categorieController->getAllCategories();
     <div class="container-fluid">
         <aside class="col-md-2 bg-dark text-light p-4 aside">
             <ul class="list-unstyled">
-                <li><h5>dashboard</h5></li>
+                <li><a href="../views/home.php"><h5>dashboard</h5></a></li>
                 <li><a href="http://localhost/youwikis/views/Categorie.php">CATEGORIES</a></li>
                 <li><a href="http://localhost/youwikis/views/Tag.php">TAGS</a></li>
-                
                 <li><a href="http://localhost/youwikis/views/archive.php">ARCHIVER</a></li>
                 <li><a href="http://localhost/youwikis/views/statistique.php">STATISTIQUES</a></li>
             </ul>
