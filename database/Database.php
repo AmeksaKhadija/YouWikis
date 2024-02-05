@@ -1,5 +1,7 @@
 <?php
 class Database {
+
+    private static $instance = null;
     private $conn;
     private $servername;
     private $username;
@@ -12,16 +14,18 @@ class Database {
         $this->password = $password;
         $this->dbname = $dbname;
 
-        try {
-            $this->conn = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            die("Connection failed: " . $e->getMessage());
+        if(self::$instance === null){
+            try {
+                self::$instance = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
+                self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                die("Connection failed: " . $e->getMessage());
+            }
         }
     }
 
     public function getConnection() {
-        return $this->conn;
+        return self::$instance;
     }
 
     public function prepare($query) {

@@ -18,9 +18,10 @@ class WikiModel
 
     public function getAllWikis()
     {
-        $req = "SELECT *, categorie.nom as category_name FROM wikitag JOIN wiki ON wikitag.id_wiki=wiki.id_wiki 
+        $req = "SELECT *, categorie.nom as category_name FROM wikitag
+        JOIN wiki ON wikitag.id_wiki=wiki.id_wiki 
         JOIN categorie ON wiki.id_categorie=categorie.id_categorie
-        JOIN tag ON tag.id_tag=wikitag.id_tag" ;
+        JOIN tag ON tag.id_tag=wikitag.id_tag";
         $stmt = $this->conn->query($req);
         $wikis = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -31,7 +32,8 @@ class WikiModel
     
     public function getAllwikisNonarchives()
     {
-        $req = "SELECT *, categorie.nom as category_name FROM wikitag JOIN wiki ON wikitag.id_wiki=wiki.id_wiki 
+        $req = "SELECT *, categorie.nom as category_name FROM wikitag
+        JOIN wiki ON wikitag.id_wiki=wiki.id_wiki 
         JOIN categorie ON wiki.id_categorie=categorie.id_categorie
         JOIN tag ON tag.id_tag=wikitag.id_tag where isAccepted=1  order by date_creation desc";
         $stmt = $this->conn->query($req);
@@ -143,7 +145,7 @@ class WikiModel
 
 public function deleteWiki($wikiId)
 {
-    $req = "DELETE FROM wiki WHERE id_wiki = :id";
+    $req = "DELETE FROM wiki WHERE id_wiki = :id ";
     $stmt = $this->conn->prepare($req);
     $stmt->bindParam(':id', $wikiId, PDO::PARAM_INT);
 
@@ -189,7 +191,8 @@ public function getTotalArticleArchive()
 
     public function search($searchTerm)
     {
-        $stmt = "SELECT *, categorie.nom as category_name FROM wikitag JOIN wiki ON wikitag.id_wiki=wiki.id_wiki 
+        $stmt = "SELECT *, categorie.nom as category_name FROM wikitag 
+        JOIN wiki ON wikitag.id_wiki=wiki.id_wiki 
         JOIN categorie ON wiki.id_categorie=categorie.id_categorie
         JOIN tag ON tag.id_tag=wikitag.id_tag WHERE titre LIKE  '%$searchTerm%' ";
         $result =  $this->conn->query($stmt);
